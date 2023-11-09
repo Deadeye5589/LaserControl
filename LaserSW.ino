@@ -1,7 +1,7 @@
   //Define for pin out of high voltage relais
-  int laserrelais = 10;   //Red & Blue Laser
-  int greenrelais = 9;  //Green Laser
-  int galvorelais = 11;  //Power Supply for Galvo System
+  int laserpowerrelais = 10;   //Power Supply for Laser Module
+  int lasersafetyrelais = 9;  //Laser Safety 
+  int galvopowerrelais = 11;  //Power Supply for Galvo System
   int laseractive = 0;
   int laserenable = 1;
   int emergencyshutdown = 2;
@@ -17,12 +17,12 @@
 void setup() {
 
   //Control of relais for laser module power supply
-  pinMode(laserrelais,OUTPUT);
-  digitalWrite(laserrelais,HIGH);
-  pinMode(greenrelais,OUTPUT);
-  digitalWrite(greenrelais,HIGH);
-  pinMode(galvorelais,OUTPUT);
-  digitalWrite(galvorelais,HIGH); 
+  pinMode(lasersafetyrelais,OUTPUT);
+  digitalWrite(lasersafetyrelais,HIGH);
+  pinMode(laserpowerrelais,OUTPUT);
+  digitalWrite(laserpowerrelais,HIGH);
+  pinMode(galvopowerrelais,OUTPUT);
+  digitalWrite(galvopowerrelais,HIGH); 
   
   //Control for external emergency shutdown box
   pinMode(emergencyshutdown,INPUT);
@@ -39,11 +39,11 @@ void loop() {
     if(emergencypressed && enabled)
     {
       {
-        digitalWrite(galvorelais,LOW);
+        digitalWrite(galvopowerrelais,LOW);
         delay(1000);
-        digitalWrite(greenrelais,LOW);
+        digitalWrite(laserpowerrelais,LOW);
         delay(1000);
-        digitalWrite(laserrelais,LOW);
+        digitalWrite(lasersafetyrelais,LOW);
         bootup = 1;
         digitalWrite(laseractive,HIGH);
        //Interrup to faling signal on emergencyshutdown line
@@ -63,10 +63,9 @@ void loop() {
 
 void emergency(void)
 {
-      digitalWrite(greenrelais,HIGH);
-      digitalWrite(laserrelais,HIGH);
-      digitalWrite(galvorelais,HIGH);
+      digitalWrite(lasersafetyrelais,HIGH);
+      digitalWrite(laserpowerrelais,HIGH);
+      digitalWrite(galvopowerrelais,HIGH);
       digitalWrite(laseractive,LOW);
       emergencytriggered = 1;
 }
-
