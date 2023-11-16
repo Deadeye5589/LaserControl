@@ -1,6 +1,6 @@
-  //Define for pin out of high voltage relais
-  int laserpowerrelais = 10;   //Power Supply for Laser Module
-  int lasersafetyrelais = 9;  //Laser Safety 
+//Define for pin out of high voltage relais
+  int laserpowerrelais = 9;   //Power Supply for Laser Module
+  int lasersafetyrelais = 8;  //Laser Safety 
   int galvopowerrelais = 11;  //Power Supply for Galvo System
   int laseractive = 0;
   int laserenable = 1;
@@ -9,7 +9,7 @@
 
   //Variables for main loop
   int bootup = 0;     //Indicator for boot up sequence, will prevent reactivation if killswitch was triggered until main power was cycled
-  int emergencypressed = 0; 
+  int emergencynotpressed = 0; 
   int enabled = 0;
   volatile int emergencytriggered = 0;
   
@@ -34,9 +34,9 @@ void setup() {
 void loop() {  
   if(bootup == 0)
   {
-    emergencypressed = digitalRead(emergencyshutdown);
+    emergencynotpressed = digitalRead(emergencyshutdown);
     enabled = digitalRead(laserenable);
-    if(emergencypressed && enabled)
+    if(emergencynotpressed && enabled)
     {
       {
         digitalWrite(galvopowerrelais,LOW);
