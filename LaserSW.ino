@@ -2,8 +2,8 @@
   int laserpowerrelais = 9;   //Power Supply for Laser Module
   int lasersafetyrelais = 8;  //Laser Safety 
   int galvopowerrelais = 11;  //Power Supply for Galvo System
-  int laseractive = 0;
-  int laserenable = 1;
+  int laseractive = 4;
+  int laserenable = 3;
   int emergencyshutdown = 2;
 
 
