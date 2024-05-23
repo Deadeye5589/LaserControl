@@ -63,9 +63,12 @@ void loop() {
 
 void emergency(void)
 {
-      digitalWrite(lasersafetyrelais,HIGH);
-      digitalWrite(laserpowerrelais,HIGH);
-      digitalWrite(galvopowerrelais,HIGH);
-      digitalWrite(laseractive,LOW);
-      emergencytriggered = 1;
+  delay(5);
+  if(!digitalRead(emergencyshutdown)){
+    digitalWrite(lasersafetyrelais,HIGH);
+    digitalWrite(laserpowerrelais,HIGH);
+    digitalWrite(galvopowerrelais,HIGH);
+    digitalWrite(laseractive,LOW);
+    emergencytriggered = 1;
+  }
 }
